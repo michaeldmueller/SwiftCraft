@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "UIKitTools",
+    name: "ScaffoldKit",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "UIKitTools",
-            targets: ["UIKitTools"]
+            name: "ScaffoldKit",
+            targets: ["ScaffoldKit"]
         ),
     ],
     dependencies: [
@@ -17,13 +17,8 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "UIKitTools",
-            path: "Sources/UIKitTools"
-        ),
-        .testTarget(
-            name: "UIKitToolsTests",
-            dependencies: ["UIKitTools"],
-            path: "Tests/UIKitToolsTests"
-        ),
+            name: "ScaffoldKit",
+            path: "Sources/ScaffoldKit"
+        )
     ]
 )

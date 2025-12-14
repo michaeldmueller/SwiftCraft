@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct DeclarativeViews {
+public enum ScaffoldKit {
     
     public static func stackView(
         axis: NSLayoutConstraint.Axis = .vertical,
@@ -24,7 +24,7 @@ public struct DeclarativeViews {
             arrangedSubviews: arrangedSubviews
         )
     }
-    
+
     public static func stackView(
         axis: NSLayoutConstraint.Axis = .vertical,
         distribution: UIStackView.Distribution = .fill,
@@ -46,14 +46,17 @@ public struct DeclarativeViews {
         return sv
     }
     
-    public static func separator() -> UIView {
+    public static func separator(
+        backgroundColor: UIColor = AppColor.outline,
+        height: CGFloat = Constants.separatorHeight
+    ) -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.backgroundColor = AppColor.outline
+        view.backgroundColor = backgroundColor
         
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: Constants.separatorHeight),
+            view.heightAnchor.constraint(equalToConstant: height),
         ])
         
         return view
