@@ -7,6 +7,7 @@
 
 enum Log {
     
+    case error(error: Error)
     case message(message: String)
     case event(event: LogEvent)
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum ScaffoldKit {
+public enum DeclarativeView {
     
     public static func stackView(
         axis: NSLayoutConstraint.Axis = .vertical,
@@ -92,9 +92,26 @@ public enum ScaffoldKit {
         return label
     }
     
-    public static func view() -> UIView {
+    public static func view(
+        height: CGFloat? = nil,
+        width: CGFloat? = nil,
+        backgroundColor: UIColor? = nil
+    ) -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let height {
+            view.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        
+        if let width {
+            view.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        
+        if let backgroundColor {
+            view.backgroundColor = backgroundColor
+        }
+        
         return view
     }
     

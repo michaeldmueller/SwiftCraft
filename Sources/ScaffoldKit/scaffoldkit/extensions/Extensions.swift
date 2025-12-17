@@ -10,11 +10,17 @@ import UIKit
 extension UIViewController {
         
     func logError(error: Error) {
-        LoggingService.shared.error(error: error, sender: self)
+        LoggingService.shared.error(
+            message: Log.error(error: error),
+            sender: self
+        )
     }
     
     func logError(errorMessage: String) {
-        LoggingService.shared.error(message: errorMessage, sender: self)
+        LoggingService.shared.error(
+            message: Log.message(message: errorMessage),
+            sender: self
+        )
     }
     
     func displayError(
@@ -53,11 +59,8 @@ extension UIView {
         opacity: Float = 0.15,
         isInitiallyHidden: Bool = false
     ) {
-        if (isInitiallyHidden) {
-            layer.shadowColor = UIColor.clear.cgColor
-        } else {
-            layer.shadowColor = UIColor.black.cgColor
-        }
+        layer.shadowColor = isInitiallyHidden
+            ? UIColor.clear.cgColor : UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: offset)
         layer.shadowOpacity = opacity
         layer.shadowRadius = radius
