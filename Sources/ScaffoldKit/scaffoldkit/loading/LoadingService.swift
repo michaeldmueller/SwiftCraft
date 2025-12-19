@@ -1,5 +1,5 @@
 //
-//  ViewUtil.swift
+//  LoadingService.swift
 //  UIKitTools
 //
 //  Created by Michael Mueller on 9/3/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ViewUtil {
+public class LoadingService {
     
     static private let loadingView = LoadingView()
     
