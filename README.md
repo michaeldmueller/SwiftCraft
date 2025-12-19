@@ -3,7 +3,23 @@ An opiniated toolkit for accelerating iOS development with declarative views, lo
 # Features
 
 ### View Factory Optimized for Programmatic UIKit
-Instantiate views by calling `ScaffoldKit.imageView()` or `ScaffoldKit.label()`. Each function has commonsense defaults to minimize the amount of code required. Supported views include:
+Instantiate views by calling `ScaffoldKit.imageView()` or `ScaffoldKit.label()`. Each function has common-sense defaults to minimize the amount of code required. 
+
+#### Example Usage
+```swift
+let label = ScaffoldKit.label(
+    text: "Some sample text",
+    textColor: AppColor.primary
+)
+
+let view = ScaffoldKit.view(
+    height: 100.0,
+    width: 100.0,
+    backgroundColor: AppColor.container
+)
+```
+
+Supported views include:
 - `stackView`
 - `separator`
 - `label`
