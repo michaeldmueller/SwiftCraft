@@ -29,8 +29,9 @@ extension UIViewController {
         buttonText: String = "Okay",
         completion: (() -> Void)? = nil
     ) {
-        DispatchQueue.main.async {
+        MainThread.run {
             let presenter: UIViewController
+            
             if let tabBarController = self.tabBarController {
                 presenter = tabBarController
             } else if let navigationController = self.navigationController {
@@ -39,7 +40,7 @@ extension UIViewController {
                 presenter = self
             }
             
-            AlertService.displayAlert(
+            ScaffoldPrompt.alert(
                 title: title,
                 message: message,
                 presenter: presenter,

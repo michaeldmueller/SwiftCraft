@@ -11,7 +11,7 @@ public func stackView(
     axis: NSLayoutConstraint.Axis = .vertical,
     distribution: UIStackView.Distribution = .fill,
     alignment: UIStackView.Alignment = .fill,
-    spacing: Double = Constants.smallMargin,
+    spacing: Double = Scaffold.appearance.margin.small,
     arrangedSubviews: [UIView] = []
 ) -> UIStackView {
     let sv = UIStackView()
@@ -29,8 +29,8 @@ public func stackView(
 }
 
 public func separator(
-    backgroundColor: UIColor = AppColor.outline,
-    height: CGFloat = Constants.separatorHeight
+    backgroundColor: UIColor = Scaffold.appearance.color.outline,
+    height: CGFloat = 1.0
 ) -> UIView {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ public func separator(
 public func label(
     text: String? = nil,
     font: UIFont = UIFont.scalingFont(forTextStyle: .body),
-    textColor: UIColor = AppColor.textPrimary,
+    textColor: UIColor = Scaffold.appearance.color.textPrimary,
     textAlignment: NSTextAlignment = NSTextAlignment.left,
     numberOfLines: Int = 1
 ) -> UILabel {
@@ -60,7 +60,7 @@ public func label(
 
 public func imageView(
     image: UIImage?,
-    tintColor: UIColor = AppColor.primary,
+    tintColor: UIColor = Scaffold.appearance.color.primary,
     contentMode: UIView.ContentMode = .scaleAspectFit,
     height: CGFloat? = nil,
     width: CGFloat? = nil

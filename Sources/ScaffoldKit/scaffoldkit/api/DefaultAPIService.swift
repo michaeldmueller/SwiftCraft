@@ -18,7 +18,7 @@ public final class DefaultAPIService: APIService {
         requestBody: RequestBody,
         pathParameters: [String]? = nil,
         queryParameters: [String : String]? = nil
-    ) async throws -> T where T : Decodable {        
+    ) async throws -> T where T : Decodable {
         return try await makeAPICall(
             url: path.asURL(
                 pathParameters: pathParameters,
