@@ -9,9 +9,9 @@ import UIKit
 
 public enum SC {
     
-    private static var _appearance = SwiftCraftAppearance()
+    private static var _appearance = SCAppearance()
     
-    public static var appearance: SwiftCraftAppearance {
+    public static var appearance: SCAppearance {
         get { _appearance }
         set { _appearance = newValue }
     }        

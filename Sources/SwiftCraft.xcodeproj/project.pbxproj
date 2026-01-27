@@ -7,26 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		73828B512E6880CB00150B3F /* ScaffoldKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ScaffoldKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73828B512E6880CB00150B3F /* SwiftCraft.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCraft.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		73828B582E6880CB00150B3F /* Exceptions for "ScaffoldKit" folder in "ScaffoldKit" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			publicHeaders = (
-				UIKitTools.h,
-			);
-			target = 73828B502E6880CB00150B3F /* ScaffoldKit */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		73828B532E6880CB00150B3F /* ScaffoldKit */ = {
+		73828B532E6880CB00150B3F /* SwiftCraft */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				73828B582E6880CB00150B3F /* Exceptions for "ScaffoldKit" folder in "ScaffoldKit" target */,
-			);
-			path = ScaffoldKit;
+			path = SwiftCraft;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -45,7 +32,7 @@
 		73828B472E6880CB00150B3F = {
 			isa = PBXGroup;
 			children = (
-				73828B532E6880CB00150B3F /* ScaffoldKit */,
+				73828B532E6880CB00150B3F /* SwiftCraft */,
 				73828B522E6880CB00150B3F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,7 +40,7 @@
 		73828B522E6880CB00150B3F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				73828B512E6880CB00150B3F /* ScaffoldKit.framework */,
+				73828B512E6880CB00150B3F /* SwiftCraft.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,9 +58,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		73828B502E6880CB00150B3F /* ScaffoldKit */ = {
+		73828B502E6880CB00150B3F /* SwiftCraft */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 73828B592E6880CB00150B3F /* Build configuration list for PBXNativeTarget "ScaffoldKit" */;
+			buildConfigurationList = 73828B592E6880CB00150B3F /* Build configuration list for PBXNativeTarget "SwiftCraft" */;
 			buildPhases = (
 				73828B4C2E6880CB00150B3F /* Headers */,
 				73828B4D2E6880CB00150B3F /* Sources */,
@@ -85,13 +72,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				73828B532E6880CB00150B3F /* ScaffoldKit */,
+				73828B532E6880CB00150B3F /* SwiftCraft */,
 			);
-			name = ScaffoldKit;
+			name = SwiftCraft;
 			packageProductDependencies = (
 			);
 			productName = UIKitTools;
-			productReference = 73828B512E6880CB00150B3F /* ScaffoldKit.framework */;
+			productReference = 73828B512E6880CB00150B3F /* SwiftCraft.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +95,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 73828B4B2E6880CB00150B3F /* Build configuration list for PBXProject "ScaffoldKit" */;
+			buildConfigurationList = 73828B4B2E6880CB00150B3F /* Build configuration list for PBXProject "SwiftCraft" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -124,7 +111,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				73828B502E6880CB00150B3F /* ScaffoldKit */,
+				73828B502E6880CB00150B3F /* SwiftCraft */,
 			);
 		};
 /* End PBXProject section */
@@ -174,7 +161,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = me.mdmueller.ScaffoldKit;
+				PRODUCT_BUNDLE_IDENTIFIER = me.mdmueller.SwiftCraft;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -212,7 +199,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = me.mdmueller.ScaffoldKit;
+				PRODUCT_BUNDLE_IDENTIFIER = me.mdmueller.SwiftCraft;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -354,7 +341,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		73828B4B2E6880CB00150B3F /* Build configuration list for PBXProject "ScaffoldKit" */ = {
+		73828B4B2E6880CB00150B3F /* Build configuration list for PBXProject "SwiftCraft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				73828B5C2E6880CB00150B3F /* Debug */,
@@ -363,7 +350,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		73828B592E6880CB00150B3F /* Build configuration list for PBXNativeTarget "ScaffoldKit" */ = {
+		73828B592E6880CB00150B3F /* Build configuration list for PBXNativeTarget "SwiftCraft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				73828B5A2E6880CB00150B3F /* Debug */,

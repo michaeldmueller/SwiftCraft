@@ -16,8 +16,8 @@ extension SC {
         spacing: Double = SC.appearance.margin.small,
         arrangedSubviews: [UIView] = []
     ) -> UIStackView {
-        let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
+        let sv: UIStackView = viewWithoutAutoresizing()
+
         sv.axis = axis
         sv.distribution = distribution
         sv.alignment = alignment
@@ -34,8 +34,8 @@ extension SC {
         backgroundColor: UIColor = SC.appearance.color.outline,
         height: CGFloat = 1.0
     ) -> UIView {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view: UIView = viewWithoutAutoresizing()
+        
         view.backgroundColor = backgroundColor
         view.heightAnchor.constraint(equalToConstant: height).isActive = true
         
@@ -44,13 +44,13 @@ extension SC {
 
     public static func label(
         text: String? = nil,
-        font: UIFont = UIFont.scalingFont(forTextStyle: .body),
+        font: UIFont = SC.appearance.font.body,
         textColor: UIColor = SC.appearance.color.textPrimary,
         textAlignment: NSTextAlignment = NSTextAlignment.left,
         numberOfLines: Int = 1
     ) -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label: UILabel = viewWithoutAutoresizing()
+        
         label.text = text
         label.font = font
         label.textColor = textColor
@@ -67,8 +67,8 @@ extension SC {
         height: CGFloat? = nil,
         width: CGFloat? = nil
     ) -> UIImageView {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
+        let iv: UIImageView = viewWithoutAutoresizing()
+        
         iv.image = image
         iv.tintColor = tintColor
         iv.contentMode = contentMode
@@ -89,8 +89,7 @@ extension SC {
         width: CGFloat? = nil,
         backgroundColor: UIColor? = nil
     ) -> UIView {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view: UIView = viewWithoutAutoresizing()
         
         if let height {
             view.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -105,6 +104,12 @@ extension SC {
         }
         
         return view
+    }
+    
+    public static func viewWithoutAutoresizing<T: UIView>() -> T {
+        let t = T()
+        t.translatesAutoresizingMaskIntoConstraints = false
+        return t
     }
     
 }
