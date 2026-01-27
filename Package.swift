@@ -2,26 +2,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "ScaffoldKit",
+    name: "SwiftCraft",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "ScaffoldKit",
-            targets: ["ScaffoldKit"]
+            name: "SwiftCraft",
+            targets: ["SwiftCraft"]
         ),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "ScaffoldKit",
-            path: "Sources/ScaffoldKit"
-        ),
-        .testTarget(
-            name: "ScaffoldKitTests",
-            dependencies: ["ScaffoldKit"],
-            path: "Tests/ScaffoldKitTests"
-        ),
+            name: "SwiftCraft",
+            path: "Sources/SwiftCraft"
+        )
     ]
 )

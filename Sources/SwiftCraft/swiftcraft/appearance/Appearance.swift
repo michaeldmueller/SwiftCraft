@@ -7,17 +7,6 @@
 
 import UIKit
 
-public enum Scaffold {
-
-    private static var _appearance = ScaffoldAppearance()
-    
-    public static var appearance: ScaffoldAppearance {
-        get { _appearance }
-        set { _appearance = newValue }
-    }
-    
-}
-
 public struct ScaffoldAppearance {
     
     public var margin: Margin = Margin()
