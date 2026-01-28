@@ -42,6 +42,10 @@ extension SC {
         
         button.configuration = filledConfiguration(with: appearance)
         
+        if let height = appearance.height {
+            button.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        
         return button
     }
     
@@ -53,6 +57,10 @@ extension SC {
         let appearance = SC.appearance.buttons.outline
         
         button.configuration = borderedConfiguration(with: appearance)
+        
+        if let height = appearance.height {
+            button.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
         
         return button
     }
@@ -121,6 +129,7 @@ public struct ButtonAppearance {
     public var font: UIFont = .systemFont(ofSize: 15.0, weight: .regular)
     public var cornerStyle: UIButton.Configuration.CornerStyle = .fixed
     public var cornerRadius: CGFloat = 8.0
+    public var height: CGFloat? = 52.0
 
     public init() {}
 
