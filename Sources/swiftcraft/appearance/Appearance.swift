@@ -54,10 +54,27 @@ public struct SCAppearance {
     }
     
     public struct Buttons {
-        public var primary = ButtonAppearance.defaultPrimaryConfiguration()
-        public var secondary = ButtonAppearance.defaultSecondaryConfiguration()
-        public var tertiary = ButtonAppearance.defaultTertiaryConfiguration()
-        public var outline = ButtonAppearance.defaultOutlineConfiguration()
+        private var _primary: ButtonAppearance?
+        private var _secondary: ButtonAppearance?
+        private var _tertiary: ButtonAppearance?
+        private var _outline: ButtonAppearance?
+
+        public var primary: ButtonAppearance {
+            get { _primary ?? ButtonAppearance.defaultPrimaryConfiguration() }
+            set { _primary = newValue }
+        }
+        public var secondary: ButtonAppearance {
+            get { _secondary ?? ButtonAppearance.defaultSecondaryConfiguration() }
+            set { _secondary = newValue }
+        }
+        public var tertiary: ButtonAppearance {
+            get { _tertiary ?? ButtonAppearance.defaultTertiaryConfiguration() }
+            set { _tertiary = newValue }
+        }
+        public var outline: ButtonAppearance {
+            get { _outline ?? ButtonAppearance.defaultOutlineConfiguration() }
+            set { _outline = newValue }
+        }
 
         public init() {}
     }

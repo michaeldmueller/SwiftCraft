@@ -18,6 +18,8 @@ extension SC {
         
         button.configuration = filledConfiguration(with: appearance)
         
+        button.setTitle(title, for: .normal)
+        
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
         }
@@ -33,6 +35,8 @@ extension SC {
         let appearance = SC.appearance.buttons.secondary
         
         button.configuration = filledConfiguration(with: appearance)
+        
+        button.setTitle(title, for: .normal)
         
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -50,6 +54,8 @@ extension SC {
         
         button.configuration = filledConfiguration(with: appearance)
         
+        button.setTitle(title, for: .normal)
+        
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
         }
@@ -65,6 +71,8 @@ extension SC {
         let appearance = SC.appearance.buttons.outline
         
         button.configuration = borderedConfiguration(with: appearance)
+        
+        button.setTitle(title, for: .normal)
         
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -132,38 +140,59 @@ public class SCButton: UIButton {
 
 public struct ButtonAppearance {
 
-    public var baseBackgroundColor: UIColor? = .systemBlue
-    public var baseForegroundColor: UIColor = .white
-    public var font: UIFont = .systemFont(ofSize: 15.0, weight: .regular)
-    public var cornerStyle: UIButton.Configuration.CornerStyle = .fixed
-    public var cornerRadius: CGFloat = 8.0
-    public var height: CGFloat? = 52.0
+    public var baseBackgroundColor: UIColor?
+    public var baseForegroundColor: UIColor
+    public var font: UIFont
+    public var cornerStyle: UIButton.Configuration.CornerStyle
+    public var cornerRadius: CGFloat
+    public var height: CGFloat?
 
-    public init() {}
+    public init(
+        baseBackgroundColor: UIColor? = nil,
+        baseForegroundColor: UIColor = .white,
+        font: UIFont = .systemFont(ofSize: 15.0, weight: .regular),
+        cornerStyle: UIButton.Configuration.CornerStyle = .fixed,
+        cornerRadius: CGFloat = 8.0,
+        height: CGFloat? = 52.0
+    ) {
+        self.baseBackgroundColor = baseBackgroundColor
+        self.baseForegroundColor = baseForegroundColor
+        self.font = font
+        self.cornerStyle = cornerStyle
+        self.cornerRadius = cornerRadius
+        self.height = height
+    }
 
     static func defaultPrimaryConfiguration() -> ButtonAppearance {
-        return ButtonAppearance()
+        return ButtonAppearance(
+            baseBackgroundColor: SC.appearance.color.primary,
+            baseForegroundColor: SC.appearance.color.onPrimary,
+            font: SC.appearance.font.callout
+        )
     }
 
     static func defaultSecondaryConfiguration() -> ButtonAppearance {
-        var secondary = ButtonAppearance()
-        secondary.baseBackgroundColor = .systemRed
-        secondary.baseForegroundColor = .white
-        return secondary
+        return ButtonAppearance(
+            baseBackgroundColor: SC.appearance.color.secondary,
+            baseForegroundColor: SC.appearance.color.onSecondary,
+            font: SC.appearance.font.callout
+        )
     }
 
     static func defaultTertiaryConfiguration() -> ButtonAppearance {
-        var tertiary = ButtonAppearance()
-        tertiary.baseBackgroundColor = .lightGray
-        tertiary.baseForegroundColor = .white
-        return tertiary
+        return ButtonAppearance(
+            baseBackgroundColor: SC.appearance.color.container,
+            baseForegroundColor: SC.appearance.color.textPrimary,
+            font: SC.appearance.font.callout
+        )
     }
 
     static func defaultOutlineConfiguration() -> ButtonAppearance {
-        var outline = ButtonAppearance()
-        outline.baseBackgroundColor = nil
-        outline.baseForegroundColor = .systemBlue
-        return outline
+        return ButtonAppearance(
+            baseBackgroundColor: nil,
+            baseForegroundColor: SC.appearance.color.primary,
+            font: SC.appearance.font.callout
+        )
     }
 
 }
