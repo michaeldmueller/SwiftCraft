@@ -18,6 +18,10 @@ extension SC {
         
         button.configuration = filledConfiguration(with: appearance)
         
+        if let height = appearance.height {
+            button.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        
         return button
     }
     
@@ -29,6 +33,10 @@ extension SC {
         let appearance = SC.appearance.buttons.secondary
         
         button.configuration = filledConfiguration(with: appearance)
+        
+        if let height = appearance.height {
+            button.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
         
         return button
     }
@@ -146,8 +154,8 @@ public struct ButtonAppearance {
 
     static func defaultTertiaryConfiguration() -> ButtonAppearance {
         var tertiary = ButtonAppearance()
-        tertiary.baseBackgroundColor = .gray
-        tertiary.baseForegroundColor = .darkText
+        tertiary.baseBackgroundColor = .lightGray
+        tertiary.baseForegroundColor = .white
         return tertiary
     }
 
