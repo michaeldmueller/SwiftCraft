@@ -116,11 +116,11 @@ public class SCButton: UIButton {
 
 public struct ButtonAppearance {
 
-    public let baseBackgroundColor: UIColor? = SC.appearance.color.primary
-    public let baseForegroundColor: UIColor = SC.appearance.color.onPrimary
-    public let font: UIFont = SC.appearance.font.callout
-    public let cornerStyle: UIButton.Configuration.CornerStyle = .fixed
-    public let cornerRadius: CGFloat = 8.0
+    public var baseBackgroundColor: UIColor? = SC.appearance.color.primary
+    public var baseForegroundColor: UIColor = SC.appearance.color.onPrimary
+    public var font: UIFont = SC.appearance.font.callout
+    public var cornerStyle: UIButton.Configuration.CornerStyle = .fixed
+    public var cornerRadius: CGFloat = 8.0
 
     public init() {}
     
