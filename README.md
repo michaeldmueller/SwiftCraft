@@ -8,7 +8,7 @@ Add SwiftCraft to your project via Swift Package Manager:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-username/SwiftCraft.git", from: "1.0.0")
+    .package(url: "https://github.com/michaeldmueller/SwiftCraft.git", from: "1.0.0")
 ]
 ```
 
