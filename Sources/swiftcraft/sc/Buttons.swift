@@ -125,35 +125,28 @@ public struct ButtonAppearance {
     public init() {}
     
     static func defaultPrimaryConfiguration() -> ButtonAppearance {
-        return ButtonAppearance(
-            baseBackgroundColor: SC.appearance.color.primary,
-            baseForegroundColor: SC.appearance.color.onPrimary,
-            font: SC.appearance.font.callout
-        )
+        return ButtonAppearance()
     }
     
     static func defaultSecondaryConfiguration() -> ButtonAppearance {
-        return ButtonAppearance(
-            baseBackgroundColor: SC.appearance.color.secondary,
-            baseForegroundColor: SC.appearance.color.onSecondary,
-            font: SC.appearance.font.callout
-        )
+        var secondary = ButtonAppearance()
+        secondary.baseBackgroundColor = SC.appearance.color.secondary
+        secondary.baseForegroundColor = SC.appearance.color.onSecondary
+        return secondary
     }
     
     static func defaultTertiaryConfiguration() -> ButtonAppearance {
-        return ButtonAppearance(
-            baseBackgroundColor: SC.appearance.color.container,
-            baseForegroundColor: SC.appearance.color.textPrimary,
-            font: SC.appearance.font.callout
-        )
+        var tertiary = ButtonAppearance()
+        tertiary.baseBackgroundColor = SC.appearance.color.container
+        tertiary.baseForegroundColor = SC.appearance.color.textPrimary
+        return tertiary
     }
     
     static func defaultOutlineConfiguration() -> ButtonAppearance {
-        return ButtonAppearance(
-            baseBackgroundColor: nil,
-            baseForegroundColor: SC.appearance.color.primary,
-            font: SC.appearance.font.callout
-        )
+        var outline = ButtonAppearance()
+        outline.baseBackgroundColor = nil
+        outline.baseForegroundColor = SC.appearance.color.primary
+        return outline        
     }
     
 }
