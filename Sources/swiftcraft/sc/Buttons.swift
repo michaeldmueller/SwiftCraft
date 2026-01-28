@@ -116,37 +116,37 @@ public class SCButton: UIButton {
 
 public struct ButtonAppearance {
 
-    public var baseBackgroundColor: UIColor? = SC.appearance.color.primary
-    public var baseForegroundColor: UIColor = SC.appearance.color.onPrimary
-    public var font: UIFont = SC.appearance.font.callout
+    public var baseBackgroundColor: UIColor? = .systemBlue
+    public var baseForegroundColor: UIColor = .white
+    public var font: UIFont = .systemFont(ofSize: 15.0, weight: .regular)
     public var cornerStyle: UIButton.Configuration.CornerStyle = .fixed
     public var cornerRadius: CGFloat = 8.0
 
     public init() {}
-    
+
     static func defaultPrimaryConfiguration() -> ButtonAppearance {
         return ButtonAppearance()
     }
-    
+
     static func defaultSecondaryConfiguration() -> ButtonAppearance {
         var secondary = ButtonAppearance()
-        secondary.baseBackgroundColor = SC.appearance.color.secondary
-        secondary.baseForegroundColor = SC.appearance.color.onSecondary
+        secondary.baseBackgroundColor = .systemRed
+        secondary.baseForegroundColor = .white
         return secondary
     }
-    
+
     static func defaultTertiaryConfiguration() -> ButtonAppearance {
         var tertiary = ButtonAppearance()
-        tertiary.baseBackgroundColor = SC.appearance.color.container
-        tertiary.baseForegroundColor = SC.appearance.color.textPrimary
+        tertiary.baseBackgroundColor = .gray
+        tertiary.baseForegroundColor = .darkText
         return tertiary
     }
-    
+
     static func defaultOutlineConfiguration() -> ButtonAppearance {
         var outline = ButtonAppearance()
         outline.baseBackgroundColor = nil
-        outline.baseForegroundColor = SC.appearance.color.primary
-        return outline        
+        outline.baseForegroundColor = .systemBlue
+        return outline
     }
-    
+
 }

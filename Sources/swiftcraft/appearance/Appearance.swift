@@ -38,17 +38,17 @@ public struct SCAppearance {
     }
     
     public struct Color {
-        public var primary = UIColor.systemBlue
-        public var secondary = UIColor.systemRed
-        public var textPrimary = UIColor.darkText
-        public var textSecondary = UIColor.lightText
-        public var container = UIColor.gray
-        public var containerLight = UIColor.lightGray
-        public var outline = UIColor.separator
-        public var onPrimary = UIColor.white
-        public var onSecondary = UIColor.white
-        public var surface = UIColor.white
-        public var error = UIColor.systemRed
+        public var primary = .systemBlue
+        public var secondary = .systemRed
+        public var textPrimary = .darkText
+        public var textSecondary = .lightText
+        public var container = .gray
+        public var containerLight = .lightGray
+        public var outline = .separator
+        public var onPrimary = .white
+        public var onSecondary = .white
+        public var surface = .white
+        public var error = .systemRed
 
         public init() {}
     }
