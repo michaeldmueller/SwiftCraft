@@ -8,10 +8,20 @@
 import UIKit
 
 extension SC {
+    
+    public static func primaryButton(
+        title: String,
+        image: UIImage
+    ) -> UIButton {
+        return primaryButton(
+            title: title,
+            image: image.toButtonImage()
+        )
+    }
             
     public static func primaryButton(
         title: String,
-        image: SCButton.ButtonImage? = nil
+        image: ButtonImage? = nil
     ) -> UIButton {
         let button: UIButton = viewWithoutAutoresizing()
         let appearance = SC.appearance.buttons.primary
@@ -19,6 +29,15 @@ extension SC {
         button.configuration = filledConfiguration(with: appearance)
         
         button.setTitle(title, for: .normal)
+        
+        if let image {
+            button.configuration?.image = image.image
+            button.configuration?.imagePadding = image.padding
+            button.configuration?.imagePlacement = image.placement
+            button.configuration?.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(
+                pointSize: image.symbolPointSize
+            )
+        }
         
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -29,7 +48,17 @@ extension SC {
     
     public static func secondaryButton(
         title: String,
-        image: SCButton.ButtonImage? = nil
+        image: UIImage
+    ) -> UIButton {
+        return secondaryButton(
+            title: title,
+            image: image.toButtonImage()
+        )
+    }
+    
+    public static func secondaryButton(
+        title: String,
+        image: ButtonImage? = nil
     ) -> UIButton {
         let button: UIButton = viewWithoutAutoresizing()
         let appearance = SC.appearance.buttons.secondary
@@ -37,6 +66,15 @@ extension SC {
         button.configuration = filledConfiguration(with: appearance)
         
         button.setTitle(title, for: .normal)
+        
+        if let image {
+            button.configuration?.image = image.image
+            button.configuration?.imagePadding = image.padding
+            button.configuration?.imagePlacement = image.placement
+            button.configuration?.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(
+                pointSize: image.symbolPointSize
+            )
+        }
         
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -47,7 +85,17 @@ extension SC {
     
     public static func tertiaryButton(
         title: String,
-        image: SCButton.ButtonImage? = nil
+        image: UIImage
+    ) -> UIButton {
+        return tertiaryButton(
+            title: title,
+            image: image.toButtonImage()
+        )
+    }
+    
+    public static func tertiaryButton(
+        title: String,
+        image: ButtonImage? = nil
     ) -> UIButton {
         let button: UIButton = viewWithoutAutoresizing()
         let appearance = SC.appearance.buttons.tertiary
@@ -55,6 +103,15 @@ extension SC {
         button.configuration = filledConfiguration(with: appearance)
         
         button.setTitle(title, for: .normal)
+        
+        if let image {
+            button.configuration?.image = image.image
+            button.configuration?.imagePadding = image.padding
+            button.configuration?.imagePlacement = image.placement
+            button.configuration?.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(
+                pointSize: image.symbolPointSize
+            )
+        }
         
         if let height = appearance.height {
             button.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -65,7 +122,17 @@ extension SC {
     
     public static func borderedButton(
         title: String,
-        image: SCButton.ButtonImage? = nil
+        image: UIImage
+    ) -> UIButton {
+        return borderedButton(
+            title: title,
+            image: image.toButtonImage()
+        )
+    }
+    
+    public static func borderedButton(
+        title: String,
+        image: ButtonImage? = nil
     ) -> UIButton {
         let button: UIButton = viewWithoutAutoresizing()
         let appearance = SC.appearance.buttons.outline
@@ -85,10 +152,7 @@ extension SC {
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = appearance.baseBackgroundColor
         configuration.baseForegroundColor = appearance.baseForegroundColor
-        configuration.cornerStyle = appearance.cornerStyle
-        if (configuration.cornerStyle == .fixed) {
-            configuration.background.cornerRadius = appearance.cornerRadius
-        }
+        configuration.applyCornerStyle(style: appearance.cornerStyle)
         configuration.titleTextAttributesTransformer = .init { attributes in
             var modifiableAttributes = attributes
             modifiableAttributes.font = appearance.font
@@ -101,10 +165,7 @@ extension SC {
         var configuration = UIButton.Configuration.bordered()
         configuration.baseBackgroundColor = appearance.baseBackgroundColor
         configuration.baseForegroundColor = appearance.baseForegroundColor
-        configuration.cornerStyle = appearance.cornerStyle
-        if (configuration.cornerStyle == .fixed) {
-            configuration.background.cornerRadius = appearance.cornerRadius
-        }
+        configuration.applyCornerStyle(style: appearance.cornerStyle)
         configuration.titleTextAttributesTransformer = .init { attributes in
             var modifiableAttributes = attributes
             modifiableAttributes.font = appearance.font
@@ -115,51 +176,25 @@ extension SC {
             
 }
 
-public class SCButton: UIButton {
-    
-    public struct ButtonImage {
-        let image: UIImage
-        let imagePadding: CGFloat
-        let imagePlacement: NSDirectionalRectEdge
-        let symbolPointSize: CGFloat
-        
-        init(
-            image: UIImage,
-            imagePadding: CGFloat = 8.0,
-            imagePlacement: NSDirectionalRectEdge = .leading,
-            symbolPointSize: CGFloat = 14.0
-        ) {
-            self.image = image
-            self.imagePadding = imagePadding
-            self.imagePlacement = imagePlacement
-            self.symbolPointSize = symbolPointSize
-        }
-    }
-    
-}
-
 public struct ButtonAppearance {
 
     public var baseBackgroundColor: UIColor?
     public var baseForegroundColor: UIColor
     public var font: UIFont
-    public var cornerStyle: UIButton.Configuration.CornerStyle
-    public var cornerRadius: CGFloat
+    public var cornerStyle: CornerStyle
     public var height: CGFloat?
 
     public init(
         baseBackgroundColor: UIColor? = nil,
         baseForegroundColor: UIColor = .white,
         font: UIFont = .systemFont(ofSize: 15.0, weight: .regular),
-        cornerStyle: UIButton.Configuration.CornerStyle = .fixed,
-        cornerRadius: CGFloat = 8.0,
+        cornerStyle: CornerStyle = .capsule,
         height: CGFloat? = 52.0
     ) {
         self.baseBackgroundColor = baseBackgroundColor
         self.baseForegroundColor = baseForegroundColor
         self.font = font
         self.cornerStyle = cornerStyle
-        self.cornerRadius = cornerRadius
         self.height = height
     }
 
@@ -194,5 +229,91 @@ public struct ButtonAppearance {
             font: SC.appearance.font.callout
         )
     }
+    
+    public enum CornerStyle {
+        case fixed(radius: CGFloat)
+        case dynamic
+        case small
+        case medium
+        case large
+        case capsule
+    }
 
+}
+
+private extension UIButton.Configuration {
+    
+    mutating func applyCornerStyle(style: ButtonAppearance.CornerStyle) {
+        switch (style) {
+            case .fixed(let radius):
+                self.cornerStyle = .fixed
+                self.background.cornerRadius = radius
+            case .dynamic:
+                self.cornerStyle = .dynamic
+            case .small:
+                self.cornerStyle = .small
+            case .medium:
+                self.cornerStyle = .medium
+            case .large:
+                self.cornerStyle = .large
+            case .capsule:
+                self.cornerStyle = .capsule
+        }
+    }
+    
+}
+
+public struct ButtonImage {
+    let image: UIImage
+    let placement: NSDirectionalRectEdge
+    let padding: CGFloat
+    let symbolPointSize: CGFloat
+    
+    public init(
+        image: UIImage,
+        placement: NSDirectionalRectEdge = .leading,
+        padding: CGFloat = 8.0,
+        symbolPointSize: CGFloat = 14.0
+    ) {
+        self.image = image
+        self.placement = placement
+        self.padding = padding
+        self.symbolPointSize = symbolPointSize
+    }
+}
+
+extension Optional where Wrapped == UIImage {
+    
+    public func toButtonImage(
+        placement: NSDirectionalRectEdge = .leading,
+        padding: CGFloat = 8.0,
+        symbolPointSize: CGFloat = 14.0
+    ) -> ButtonImage? {
+        guard self != nil else {
+            return nil
+        }
+        return toButtonImage(
+            placement: placement,
+            padding: padding,
+            symbolPointSize: symbolPointSize
+        )
+    }
+    
+}
+
+extension UIImage {
+    
+    public func toButtonImage(
+        placement: NSDirectionalRectEdge = .leading,
+        padding: CGFloat = 8.0,
+        symbolPointSize: CGFloat = 14.0
+    ) -> ButtonImage {
+        return ButtonImage(
+            image: self,
+            placement: placement,
+            padding: padding,
+            symbolPointSize: symbolPointSize
+        )
+    }
+    
 }
