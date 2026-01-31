@@ -2,7 +2,179 @@
 
 A toolkit for accelerating programmatic UIKit development with declarative view factories, loading indicators, alerts, and a centralized appearance system.
 
-## Installation
+**Requirements:** iOS 16+, Swift 5.9+
+
+## Features
+
+### App Themes
+At the core of SwiftCraft is a centralized, configurable theme manager that lets you easily manage fonts, colors, buttons, and more from anywhere in your app via the `SC.appearance` namespace.
+
+Examples:
+```swift
+// out of the box
+label.font = SC.appearance.font.callout
+label.textColor = SC.appearance.color.onPrimary
+
+// with SwiftCraftShortcuts
+label.font = AppFont.callout
+label.textColor = AppColor.onContainer
+```
+
+This lets you set your theme configuration in one place and forget about it, encouraging consistency and quick development patterns.
+
+#### Fonts
+SwiftCraft supports **Dynamic Type** out of the box. By default, all fonts are scaled automatically based on the user's accessibility settings, aligning with Apple's recommended practices. If you do need a fixed font size that doesn't scale (e.g., for constrained UI elements), use the `.fixed` accessor:
+
+```swift
+titleLabel.font = SC.appearance.font.title3         // scaling
+titleLabel.font = SC.appearance.font.fixed.title3   // non-scaling
+```
+
+The following text styles are available:
+* `largeTitle`
+* `title1`
+* `title2`
+* `title3`
+* `headline`
+* `body`
+* `callout`
+* `subheadline`
+* `footnote`
+* `caption1`
+* `caption2`
+
+#### Colors
+Similar to fonts, SwiftCraft exposes the following configurable colors.
+* `primary`
+* `secondary`
+* `textPrimary`
+* `textSecondary`
+* `container`
+* `containerLight`
+* `outline`
+* `onPrimary`
+* `onSecondary`
+* `surface`
+* `error`
+
+#### Buttons
+SwiftCraft exposes configurable primary, secondary, tertiary, and bordered buttons. 
+
+```swift
+let button = SC.primaryButton(
+    title: "My primary button"
+)
+```
+
+These buttons are configured by setting `ButtonAppearance` inside `SC.appearance.buttons`. Examples:
+
+```swift
+// Round primary button
+var primary = ButtonAppearance()
+primary.baseBackgroundColor = SC.appearance.color.primary
+primary.font = AppFont.callout
+primary.cornerStyle = .capsule
+
+SC.appearance.buttons.primary = primary
+```
+
+SwiftCraft supports adding images to buttons via either directly using `UIImage`, or using a custom `ButtonImage` class that can be accessed either directly or via extension on `UIImage`. `ButtonImage` lets you change the configuration of the button at the call-site.
+
+```swift
+// From UIImage
+let button = SC.primaryButton(
+    title: "Testing",
+    image: UIImage(systemName: "arrow.forward")
+)
+
+// From ButtonImage
+let button2 = SC.secondaryButton(
+    title: "Testing",
+    image: ButtonImage(image: UIImage(systemName: "arrow.forward")!)
+)
+
+// UIImage to ButtonImage extension with additional parameters
+let button = SC.tertiaryButton(
+    title: "Testing",
+    image: UIImage(systemName: "arrow.forward")?.toButtonImage(
+        placement: .trailing,
+        padding: 12.0,
+        cornerStyle: 
+    )
+)
+```
+
+### View Factory
+Create common UIKit views with sensible defaults. All views are returned with Auto Layout disabled for use with `NSLayoutConstraint`s.
+
+```swift
+let label = SC.label(
+    text: "Hello, world",
+    font: SC.appearance.font.headline,
+    textColor: SC.appearance.color.textPrimary
+)
+
+let stack = SC.stackView(
+    axis: .vertical,
+    spacing: SC.appearance.margin.standard,
+    arrangedSubviews: [label, anotherView]
+)
+
+let image = SC.imageView(
+    image: UIImage(systemName: "star"),
+    tintColor: SC.appearance.color.primary,
+    height: 24,
+    width: 24
+)
+
+let divider = SC.separator()
+
+let spacer = SC.view(height: 20)
+```
+
+### Other Features
+#### Loading Overlay
+
+Display a loading indicator over a view controller:
+
+```swift
+SC.startLoading(parent: self)
+
+// Later...
+SC.stopLoading()
+
+// Or auto-dismiss after duration:
+SC.startLoading(parent: self, durationMillis: 2000)
+```
+
+#### Alerts and Confirmations**
+
+Present alerts, confirmation dialogs, and action sheets:
+
+```swift
+SC.alert(
+    title: "Error",
+    message: "Something went wrong.",
+    presenter: self
+)
+
+SC.confirm(
+    title: "Delete Item",
+    message: "Are you sure?",
+    presenter: self,
+    positiveCompletion: { /* delete */ },
+    cancelCompletion: nil
+)
+
+SC.actionSheet(
+    title: "Options",
+    message: "Choose an action",
+    actions: [action1, action2],
+    presenter: self
+)
+```
+
+## Installation and Setup
 
 Add SwiftCraft to your project via Swift Package Manager:
 
@@ -11,10 +183,6 @@ dependencies: [
     .package(url: "https://github.com/michaeldmueller/SwiftCraft.git", from: "1.0.0")
 ]
 ```
-
-**Requirements:** iOS 16+, Swift 5.9+
-
-## Setup
 
 We recommend initializing your theme configuration in `AppDelegate` before the app launches. Create an `AppTheme` class to centralize your customizations:
 
@@ -57,157 +225,20 @@ func application(_ application: UIApplication,
 }
 ```
 
-## Accessing Theme Values
+## SwiftCraftShortcuts
+To reduce code at the call-site, you can optionally include SwiftCraftShortcuts as well. This exposes common patterns with the `App` prefix. Examples:
+* `AppFont.callout`
+* `AppColor.primary`
 
-Once configured, access your theme fonts, colors, margins, and more from anywhere in your app via the `SC.appearance` namespace:
+To avoid conflicts, these shortcuts are not included by default.
 
-```swift
-// Colors
-let primaryColor = SC.appearance.color.primary
-let textColor = SC.appearance.color.textPrimary
-
-// Fonts
-let headlineFont = SC.appearance.font.headline
-let bodyFont = SC.appearance.font.body
-
-// Margins
-let standardSpacing = SC.appearance.margin.standard
-let largeSpacing = SC.appearance.margin.large
-```
-
-This ensures consistent styling across your entire application and makes theme changes trivial—update one value and it propagates everywhere.
-
-## Fonts: Scaled vs Fixed
-
-SwiftCraft supports **Dynamic Type** out of the box. By default, all fonts are scaled automatically based on the user's accessibility settings—this is Apple's recommended practice.
+To add, include the package:
 
 ```swift
-// Scaled font (default) - respects Dynamic Type settings
-let scaledFont = SC.appearance.font.headline
+dependencies: [
+    .package(url: "https://github.com/michaeldmueller/SwiftCraftShortcuts.git", from: "0.0.1")
+]
 ```
-
-If you need a fixed font size that doesn't scale (e.g., for constrained UI elements), use the `.fixed` accessor:
-
-```swift
-// Fixed font - ignores Dynamic Type settings
-let fixedFont = SC.appearance.font.fixed.headline
-```
-
-## Usage
-
-All functionality is accessed through the `SC` namespace.
-
-### View Factory
-
-Create common UIKit views with sensible defaults. All views are returned with `translatesAutoresizingMaskIntoConstraints = false`.
-
-```swift
-let label = SC.label(
-    text: "Hello, world",
-    font: SC.appearance.font.headline,
-    textColor: SC.appearance.color.textPrimary
-)
-
-let stack = SC.stackView(
-    axis: .vertical,
-    spacing: SC.appearance.margin.standard,
-    arrangedSubviews: [label, anotherView]
-)
-
-let image = SC.imageView(
-    image: UIImage(systemName: "star"),
-    tintColor: SC.appearance.color.primary,
-    height: 24,
-    width: 24
-)
-
-let divider = SC.separator()
-
-let spacer = SC.view(height: 20)
-```
-
-### Buttons
-
-Pre-styled buttons that automatically use your theme colors:
-
-```swift
-let primary = SC.primaryButton(title: "Submit")
-let secondary = SC.secondaryButton(title: "Delete")
-let tertiary = SC.tertiaryButton(title: "Cancel")
-let outlined = SC.borderedButton(title: "Learn More")
-```
-
-Button appearances are derived from `SC.appearance.color` by default. Override individual button styles:
-
-```swift
-SC.appearance.buttons.primary = ButtonAppearance(
-    baseBackgroundColor: .systemGreen,
-    baseForegroundColor: .white,
-    font: SC.appearance.font.callout,
-    cornerRadius: 8.0,
-    height: 52.0
-)
-```
-
-### Loading Overlay
-
-Display a loading indicator over a view controller:
-
-```swift
-SC.startLoading(parent: self)
-
-// Later...
-SC.stopLoading()
-
-// Or auto-dismiss after duration:
-SC.startLoading(parent: self, durationMillis: 2000)
-```
-
-### Alerts and Confirmations
-
-Present alerts, confirmation dialogs, and action sheets:
-
-```swift
-SC.alert(
-    title: "Error",
-    message: "Something went wrong.",
-    presenter: self
-)
-
-SC.confirm(
-    title: "Delete Item",
-    message: "Are you sure?",
-    presenter: self,
-    positiveCompletion: { /* delete */ },
-    cancelCompletion: nil
-)
-
-SC.actionSheet(
-    title: "Options",
-    message: "Choose an action",
-    actions: [action1, action2],
-    presenter: self
-)
-```
-
-Customize alert button text:
-
-```swift
-SC.appearance.text.alertDismissText = "OK"
-SC.appearance.text.confirmCancelText = "No"
-SC.appearance.text.confirmConfirmationText = "Yes"
-```
-
-## Appearance Reference
-
-| Category | Properties |
-|----------|------------|
-| **Margin** | `extraExtraSmall`, `extraSmall`, `small`, `standard`, `large`, `extraLarge`, `extraExtraLarge` |
-| **Color** | `primary`, `secondary`, `textPrimary`, `textSecondary`, `container`, `containerLight`, `outline`, `onPrimary`, `onSecondary`, `surface`, `error` |
-| **Font** | `largeTitle`, `title1`, `title2`, `title3`, `headline`, `body`, `callout`, `subheadline`, `footnote`, `caption1`, `caption2` |
-| **Font (Fixed)** | Access via `SC.appearance.font.fixed.*` |
-| **Text** | `alertDismissText`, `confirmCancelText`, `confirmConfirmationText` |
-| **Buttons** | `primary`, `secondary`, `tertiary`, `outline` |
 
 ## License
 
